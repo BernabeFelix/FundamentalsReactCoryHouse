@@ -5,39 +5,39 @@ var Authors = require('./components/author/authorPages');
 var About = require('./components/about/aboutPage');
 var Header = require('./components/common/header');
 
-// (function(window) {
-// 'use strict';
+(function(window) {
+  'use strict';
 
-var App = React.createClass({
-  render: function() {
-    var Child;
+  var App = React.createClass({
+    render: function() {
+      var Child;
 
-    switch (this.props.route) {
-      case 'about':
-        Child = About;
-        break;
-      case 'authors':
-        Child = Authors;
-        break;
-      default:
-        Child = Home;
-    }
+      switch (this.props.route) {
+        case 'about':
+          Child = About;
+          break;
+        case 'authors':
+          Child = Authors;
+          break;
+        default:
+          Child = Home;
+      }
 
-    return (
-      <div>
+      return (
+        <div>
         <Header/>
         <Child/>
       </div>
-    );
+      );
+    }
+  });
+
+  function render() {
+    var route = window.location.hash.substring(1);
+    React.render(<App route={route}/>, document.getElementById('app'));
   }
-});
 
-function render() {
-  var route = window.location.hash.substring(1);
-  React.render(<App route={route}/>, document.getElementById('app'));
-}
+  window.onhashchange = render;
+  render();
 
-window.onhashchange = render;
-render();
-
-// })(window);
+})(window);
